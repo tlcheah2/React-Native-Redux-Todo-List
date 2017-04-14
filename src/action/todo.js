@@ -7,7 +7,7 @@ export function addTodo(text) {
         id: nextTodoId++,
         text
     }
-} 
+}
 
 export function toggleTodo(id) {
     return {
@@ -16,9 +16,10 @@ export function toggleTodo(id) {
     }
 }
 
-export function setVisibilityFilter(filter){
+export function setVisibilityFilter(filter) {
     return {
         type: types.SET_VISIBILITY_FILTER,
         filter
     }
 }
+

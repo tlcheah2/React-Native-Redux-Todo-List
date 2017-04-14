@@ -26,7 +26,6 @@ export default class TodoList extends Component {
 
     render() {
         const { todos } = this.props;
-        // if (todos) {
         return (
             <ListView
                 enableEmptySections={true}
@@ -39,9 +38,5 @@ export default class TodoList extends Component {
                 }}
             />
         )
-        // } else {
-        //     return null;
-        // }
-
     }
 }

@@ -14,7 +14,7 @@ import VisibleTodoList from './container/VisibleTodoList'
 import Footer from './components/Footer'
 
 
-/** Implmentation of combineReducer --- Similar with combineReducers in react-redux */
+/** Implmentation of combineReducer --- Similar with combineReducers in redux */
 // const combineReducers = (reducers) => {
 //     return (state = {}, action) => {
 //         // console.log('reducer', reducers);
