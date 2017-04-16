@@ -6,14 +6,17 @@ import {
     Text,
     View
 } from 'react-native';
-import { createStore, combineReducers } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import createLogger from 'redux-logger'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider, connect } from 'react-redux'
-import { visibilityFilter, todos } from './reducer/todo'
 import AddTodo from './container/AddTodo'
 import VisibleTodoList from './container/VisibleTodoList'
 import Footer from './components/Footer'
-
-
+import rootRedditReducer from './reducer/reddit'
+import { visibilityFilter, todos } from './reducer/todo'
+import { selectSubreddit, fetchPosts } from './action/reddit'
+const loggerMiddleware = createLogger()
 /** Implmentation of combineReducer --- Similar with combineReducers in react-redux */
 // const combineReducers = (reducers) => {
 //     return (state = {}, action) => {
@@ -34,17 +37,23 @@ import Footer from './components/Footer'
 
 const todoApp = combineReducers({
     todos,
-    visibilityFilter
+    visibilityFilter,
+    rootRedditReducer
 })
 
+const store = createStore(todoApp, applyMiddleware(thunkMiddleware, loggerMiddleware))
 
+store.dispatch(selectSubreddit('reactjs'))
+store.dispatch(fetchPosts('reactjs')).then(() =>
+    console.log(store.getState())
+)
 
 // const store = createStore(todoApp);
 
 export default class App extends Component {
     render() {
         return (
-            <Provider store={createStore(todoApp)}>
+            <Provider store={store}>
                 <TodoApp />
             </Provider>
         )
